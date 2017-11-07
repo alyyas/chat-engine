@@ -16,6 +16,7 @@ class User extends Emitter {
 
         super();
 
+
         this.chatEngine = chatEngine;
 
         this.name = 'User';
@@ -38,6 +39,17 @@ class User extends Emitter {
          * let state = user.state;
          */
         this.state = {};
+
+
+        this.chatEngine.pubnub.getState({
+                uuid: this.uuid,
+                channels: [this.chatEngine.global.channel]
+            }, (status, response) => {
+
+                console.log('state', status, response);
+
+            }
+        );
 
         this._stateFetched = false;
 
