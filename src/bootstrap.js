@@ -89,10 +89,13 @@ module.exports = (ceConfig = {}, pnConfig = {}) => {
 
     };
 
+    let startTime = new Date().getTime();
     if (ceConfig.debug) {
+
         ChatEngine.onAny((event, payload) => {
-            console.info('debug:', event, payload);
+            console.info('debug:', (new Date().getTime() - startTime) + 'ms', event, payload);
         });
+
     }
 
     ChatEngine.protoPlugins = {};
